@@ -1,0 +1,41 @@
+NOTE: VERY IMPORTANT!!!
+=======================
+
+The Module User library and source code in this ZIP is designed for 
+use in any gauge or FS DLL, and will work from any thread in such a 
+program. However, it uses an interface into FSUIPC which did not 
+exist before version 3.328, so when compiling with this code you need 
+to advise your users to ensure they are using FSUIPC 3.40 (the 
+official release) or later.
+
+If you want your Gauge or DLL to work with older (unsupported)
+versions of FSUIPC, use the ModuleUser library you will find in the
+"ModuleUserInAsm.zip" -- that one hasn't been changed (yet).
+
+For those compiling an FS module in Delphi, check the
+Delphi translation which you can include -- "internal.pas". thanks to
+Michael "iznogoud" for this. Here are some extra notes on this for
+Delphi users:
+
+When adapting a Delphi program to work internally as a DLL:
+1. Create a buffer variable e.g. as an array [0..65534] of byte
+(let's call it fsuipc_buffer for now), and make sure that it is
+globally accessible for all following code
+
+2. Use fpcinternal instead of fpcuser
+
+3. Use open2 instead of open. As additional parameters, pass on info
+about your buffer, e.g.
+
+   FSUIPC_Open2(SIM_FS2K4, dwResult, @fsuipc_buffer[0],
+					 sizeof(fsuipc_buffer));
+
+the @ and the [0] are important, as this will result in a pointer to
+the first element of the array
+
+============================================================
+
+
+Pete Dowson,
+June 2008
+

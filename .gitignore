@@ -77,3 +77,10 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# QT Stuff
+moc_*
+*.stash
+
+#Coisas 
+Carmona*
